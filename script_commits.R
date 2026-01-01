@@ -1,9 +1,19 @@
+# Pacote ----
+
 library(gert)
+
+# Selecionar o arquivo ----
 
 gert::git_add("script_commits.R") 
 
-# 2. Fazer o commit
+# Commitar ----
+
 gert::git_commit("Script to commit")
 
-# 3. Dar o push para o GitHub (opcional)
+# Pushar ----
+
 gert::git_push()
+
+## Pullar ----
+
+gert::git_pull()
