@@ -28,3 +28,5 @@ gert::git_commit("Primeiro envio do pacote")
 
 # Envia para o GitHub
 gert::git_push(remote = "origin")
+
+usethis::edit_git_config()
