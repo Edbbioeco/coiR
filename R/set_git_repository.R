@@ -21,7 +21,7 @@ usethis::use_git_remote(name = "origin",
 
 usethis::git_default_branch_rename(from = "master", to = "main")
 # Adiciona todos os arquivos
-gert::git_add(".")
+gert::git_add("R/set_git_repository.R")
 
 # Cria o registro das alterações
 gert::git_commit("Primeiro envio do pacote")
