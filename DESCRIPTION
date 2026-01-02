@@ -9,7 +9,7 @@ Authors@R: c(
       role = c("aut", "cre")
     )
   )
-Description: That package allow to analyze canopy fisheye images, crop them into circular images, and calculate its Canopy Openness Index (COI), generating values.
+Description: That package allow to analyze canopy fisheye images, crop them into circular images, and calculate its Canopy Openness Index (COI), a widley used methodology to understand forest proprieties, as brightness and protection against solar radiation.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
