@@ -6,6 +6,8 @@ library(tidyterra)
 
 library(magrittr)
 
+library(tidyverse)
+
 # Dados ----
 
 ## Importando ----
