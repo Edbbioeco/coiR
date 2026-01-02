@@ -1,16 +1,30 @@
 Package: coiR
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Package to analyze Canopy Openness Index (COI)
 Version: 0.1.0
 Authors@R: c(
     person(
-      "Jane", "Doe",
-      email = "jane@example.com",
+      "Edson Nilton de Moura Silva-Júnior",
+      email = "edsonbbiologia@gmail.com",
       role = c("aut", "cre")
     )
   )
-Description: More about what it does (maybe more than one line).
-    Continuation lines should be indented.
-License: What license is it under?
+Description: That package allow to analyze canopy fisheye images, crop them into circular images, and calculate its Canopy Openness Index (COI), generating values.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 7.3.3
+Depends: 
+    R (>= 4.1)
+Imports:
+    terra,
+    tidyterra,
+    dplyr,
+    tidyr,
+    magrittr,
+    forcats,
+    ggplot2,
+    purrr,
+    readr,
+    stringr,
+    tibble
