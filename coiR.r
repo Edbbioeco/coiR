@@ -90,7 +90,7 @@ convert <- function(x){
 }
 
 imagem_bw_scale <- imagem_bw |> 
-  tidyterra::mutate(imagem_1 = imagem_1 |> 
+  tidyterra::mutate(imagem1_1 = imagem1_1 |> 
                       convert()) |> 
   terra::crop(buffer) |> 
   terra::mask(buffer)
