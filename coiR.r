@@ -52,8 +52,6 @@ buffer <- terra::buffer(centroide, width = raio)
 
 buffer
 
-buffer |> plot()
-
 ## Recortando a imagem ----
 
 imagem_crop <- imagem |> 
