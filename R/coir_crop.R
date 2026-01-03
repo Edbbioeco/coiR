@@ -29,6 +29,19 @@
 #' cropped_image <- coiR::coir_crop(image_single)
 #' 
 #' cropped_image
+#' 
+#' # Crop multiple images
+#' 
+#' crop_images <- function(images){
+#' 
+#'  croppeds <- images |> 
+#'    coiR::coir_crop()
+#'    
+#'  print(croppeds)
+#' 
+#' }
+#' 
+#' purrr::walk(images, crop_images)
 #'
 #' @export
 
