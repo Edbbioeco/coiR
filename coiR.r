@@ -83,7 +83,7 @@ ggplot() +
 
 convert <- function(x){
   
-  scl <- (x - min(x)) / (max(x) - min(x))
+  scl <- (x - min(x, na.rm = TRUE)) / (max(x, na.rm = TRUE) - min(x, na.rm = TRUE))
   
   return(scl)
   
