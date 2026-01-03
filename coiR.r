@@ -12,7 +12,7 @@ library(tidyverse)
 
 ## Importando ----
 
-imagem <- terra::rast("cropped-images/imagem.jpg")
+imagem <- terra::rast("cropped-images/imagem1.png")
 
 ## Visualizando ----
 
@@ -50,7 +50,7 @@ raio
 
 buffer <- terra::buffer(centroide, width = raio)
 
-buffer
+buffer |> plot()
 
 ## Recortando a imagem ----
 
