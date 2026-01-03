@@ -12,3 +12,13 @@ image_single <- images[[1]]
 image_single |> class()
 
 coiR::coir_crop(image_single)
+
+image_single
+
+source("coiR.r")
+
+imagem_bw2 <- imagem_bw
+
+names(imagem_bw2) <- "variavel"
+
+imagem_bw2
