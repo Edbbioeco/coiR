@@ -7,9 +7,9 @@
 coir_crop(data, plot = TRUE)
 }
 \arguments{
-\item{data}{a canopy image, as a SpatRast class objecr, from \href{https://rspatial.github.io/terra/}{terra} package.}
+\item{data}{A canopy image, as a SpatRast class objecr, from \href{https://rspatial.github.io/terra/}{terra} package.}
 
-\item{plot}{default is TRUE. If TRUE, function plot circular cropped image.}
+\item{plot}{Default is TRUE. If TRUE, function plot circular cropped image.}
 }
 \description{
 To analyze Canopy Opennes Index (COI), we shot images using a fisheye lens. Nevertheless that usability, fisheye images have null spaces, due image distorction. To avoid to overestimaye canopy closure, we need to previously crop the images.
@@ -38,5 +38,18 @@ image_single <- images[[1]]
 cropped_image <- coiR::coir_crop(image_single)
 
 cropped_image
+
+# Crop multiple images
+
+crop_images <- function(images){
+
+ croppeds <- images |> 
+   coiR::coir_crop()
+   
+ print(croppeds)
+
+}
+
+purrr::walk(images, crop_images)
 
 }
