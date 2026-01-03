@@ -2,9 +2,9 @@
 #'
 #' @description To analyze Canopy Opennes Index (COI), we shot images using a fisheye lens. Nevertheless that usability, fisheye images have null spaces, due image distorction. To avoid to overestimaye canopy closure, we need to previously crop the images.
 #'
-#' @param data a canopy image, as a SpatRast class objecr, from \href{https://rspatial.github.io/terra/}{terra} package.
+#' @param data A canopy image, as a SpatRast class objecr, from \href{https://rspatial.github.io/terra/}{terra} package.
 #' 
-#' @param plot default is TRUE. If TRUE, function plot circular cropped image.
+#' @param plot Default is TRUE. If TRUE, function plot circular cropped image.
 #'
 #' @details That function must to be used only for images were not cropped. Wheter your data are images previously circular cropped, that function are not required to calculate COI.
 
