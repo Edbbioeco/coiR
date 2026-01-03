@@ -22,3 +22,7 @@ imagem_bw2 <- imagem_bw
 names(imagem_bw2) <- "variavel"
 
 imagem_bw2
+
+image_single |> 
+  coiR::coir_crop() |> 
+  coir_binarize()
