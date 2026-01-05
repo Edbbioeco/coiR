@@ -23,12 +23,24 @@ devtools::install_github("Edbbioeco/coiR")
 
 # Loading package
 
+`coiR` package is downloaded now, so we can library it. Additionaly, we library the following packages:
+
+- [terra](https://rspatial.github.io/terra/): import images files as rasters;
+
+- [purrr](https://purrr-tidyverse-org.translate.goog/?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=pt&_x_tr_pto=tc): make loops for multiple operations;
+
+- [ggplot2](https://ggplot2.tidyverse.org): make elegant graphs for imported images;
+
+- [tidyterra](https://dieghernan.github.io/tidyterra/): visualize RGB raster
+
 ```{r}
 library(coiR)
 
 library(terra)
 
-library(tidyverse)
+library(purrr)
+
+library(ggplot2)
 
 library(tidyterra)
 ```
@@ -36,6 +48,8 @@ library(tidyterra)
 # Data
 
 ## Importing 
+
+Now, we need to import our data. Images may be shotten photos, as .png, .jpg or .jpeg files. first, we informe images directory (`files`), and import them using `terra::rast()` function for every image, throught a loop with `purrr::map()` function. Our images (`images`) are setted as a list class object.
 
 ```{r}
 files <- paste0("cropped-images/imagem", 1:4, ".png")
@@ -50,6 +64,57 @@ images
 
 ## Visualizing
 
+Next, lets visualize every image, using a `purrr::map()` loop, through `ggplot` and `tidyterra::geom_spatraster_rgb()` function.
+
 ```{r}
 purrr::map(images, function(data){ggplot() + tidyterra::geom_spatraster_rgb(data = data) + theme_void()})
 ```
+
+# Canopy Openness Index 
+
+## Isolating a single image
+
+```{r}
+single_image <- images[[1]]
+```
+
+## Crop image
+
+```{r}
+single_image |> 
+  coiR::coir_crop()
+```
+
+```{r}
+purrr::map(images, coiR::coir_crop)
+```
+
+## Binarize images
+
+```{r}
+single_image |> 
+  coiR::coir_crop(plot = FALSE) |> 
+  coiR::coir_binarize()
+```
+
+```{r}
+purrr::map(images, function(images){coiR::coir_crop(data = images,
+                                                    plot = FALSE) |>
+    coiR::coir_binarize()})
+```
+
+## Index
+
+```{r}
+single_image |> 
+  coiR::coir_crop(plot = FALSE) |> 
+  coiR::coir_binarize(plot = FALSE) |> 
+  coiR::coir_index()
+```
+
+```{r}
+purrr::map(images, function(images){coiR::coir_crop(data = images) |>
+    coiR::coir_binarize() |> 
+    coiR::coir_index()})
+```
+
