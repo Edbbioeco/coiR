@@ -1,5 +1,5 @@
 ---
-title: "README"
+title: "coiR"
 author: "Edson Silva-Júnior"
 date: "`r Sys.Date()`"
 output: html_document
@@ -59,6 +59,8 @@ files
 images <- purrr::map(files,
                      terra::rast)
 
+names(images) <- paste0("cropped-images/imagem", 1:4, ".png")
+
 images
 ```
 
@@ -113,8 +115,35 @@ single_image |>
 ```
 
 ```{r}
-purrr::map(images, function(images){coiR::coir_crop(data = images) |>
-    coiR::coir_binarize() |> 
+purrr::map(images, function(images){coiR::coir_crop(data = images,
+                                                    plot = FALSE) |>
+    coiR::coir_binarize(plot = FALSE) |> 
     coiR::coir_index()})
+```
+
+```{r}
+vector_index <- c()
+
+multiple_index <- function(images, verbose = FALSE){
+  
+  index <- images |> 
+    coiR::coir_crop(plot = FALSE) |>
+    coiR::coir_binarize(plot = FALSE) |> 
+    coiR::coir_index(round = 3)
+  
+  vector_index <<- c(vector_index, index)
+  
+}
+
+purrr::map(images, multiple_index)
+
+vector_index
+```
+
+```{r}
+df_index <- tibble::tibble(id = images |> names(),
+                           Index = vector_index)
+
+df_index
 ```
 
