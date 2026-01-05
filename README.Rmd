@@ -12,3 +12,44 @@ knitr::opts_chunk$set(echo = TRUE)
 # [coiR](https://github.com/Edbbioeco/coiR)<img src="logo_coiR.png" align = "right" width="150">
 
 > Package to calculate Canopy Openness Index from canopy images
+
+# Installing package
+
+```{r, eval = FALSE}
+require("devtools")
+
+devtools::install_github("Edbbioeco/coiR")
+```
+
+# Loading package
+
+```{r}
+library(coiR)
+
+library(terra)
+
+library(tidyverse)
+
+library(tidyterra)
+```
+
+# Data
+
+## Importing 
+
+```{r}
+files <- paste0("cropped-images/imagem", 1:4, ".png")
+
+files
+
+images <- purrr::map(files,
+                     terra::rast)
+
+images
+```
+
+## Visualizing
+
+```{r}
+purrr::map(images, function(data){ggplot() + tidyterra::geom_spatraster_rgb(data = data) + theme_void()})
+```
