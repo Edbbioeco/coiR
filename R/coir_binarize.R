@@ -30,7 +30,7 @@
 #' 
 #' binarized_image <- image_single |> 
 #'  coiR::coir_crop() |> 
-#'  coir_binarize()
+#'  coiR::coir_binarize()
 #' 
 #' binarized_image
 #' 
