@@ -18,6 +18,7 @@ Depends:
     R (>= 4.1),
     terra,
     tidyterra,
+    tidyverse,
     dplyr,
     tidyr,
     magrittr,
@@ -39,3 +40,6 @@ Imports:
     readr,
     stringr,
     tibble
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
