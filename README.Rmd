@@ -1,0 +1,14 @@
+---
+title: "README"
+author: "Edson Silva-Júnior"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# [coiR](https://github.com/Edbbioeco/coiR)<img src="logo_coiR.png" align = "right" width="150">
+
+> Package to calculate Canopy Openness Index from canopy images
