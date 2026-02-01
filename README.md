@@ -30,7 +30,7 @@ library the following packages:
 - [tidyterra](https://dieghernan.github.io/tidyterra/): visualize RGB
   raster.
 
-<div class="callout.Important">
+<div class="callout.important">
 
 Before load packages, make sure they are previously downloaded.
 
