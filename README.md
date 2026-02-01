@@ -30,9 +30,11 @@ library the following packages:
 - [tidyterra](https://dieghernan.github.io/tidyterra/): visualize RGB
   raster.
 
-> [!IMPORTANT]
->
-> Before load packages, make sure they are previously downloaded.
+<div class="callout.Important">
+
+Before load packages, make sure they are previously downloaded.
+
+</div>
 
 ``` r
 library(coiR)
@@ -453,11 +455,6 @@ purrr::map(images, function(images){coiR::coir_crop(data = images,
     coiR::coir_index()})
 ```
 
-
-    |---------|---------|---------|---------|
-    =========================================
-                                              
-
     $`cropped-images/imagem1.png`
     [1] 0.51
 
@@ -477,6 +474,11 @@ instead `<-`. For more values details, we set `round = 3` argument in
 `coiR::coir_index()` functions, to set decimal places. All in a
 `purrr::map()` loop.
 
+> [!NOTE]
+>
+> A good practice to assist loops for images in coiR package is store
+> them into a contained folder, where images file names got a pattern.
+
 ``` r
 vector_index <- c()
 
@@ -493,15 +495,6 @@ multiple_index <- function(images, verbose = FALSE){
 
 purrr::map(images, multiple_index)
 ```
-
-
-    |---------|---------|---------|---------|
-    =========================================
-                                              
-
-    |---------|---------|---------|---------|
-    =========================================
-                                              
 
     $`cropped-images/imagem1.png`
     [1] 0.507
@@ -521,7 +514,12 @@ vector_index
 
     [1] 0.507 0.540 0.310 0.308
 
-Finally, we make a dtaframe with those values.
+Finally, we make a data frame with those values.
+
+> [!NOTE]
+>
+> That data frame can be exported for different file formats, such as
+> .xlsx or .csv. That practice assists save analysis results.
 
 ``` r
 df_index <- tibble::tibble(id = images |> names(),
