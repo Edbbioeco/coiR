@@ -116,7 +116,7 @@ files
 ``` r
 images <- purrr::map(files,
                      terra::rast) |> 
-  setNames(files)
+  setNames(paste0("imagem", 1:4))
 ```
 
     Warning: [rast] unknown extent
@@ -128,7 +128,7 @@ images <- purrr::map(files,
 images
 ```
 
-    $`cropped-images/imagem1.png`
+    $imagem1
     class       : SpatRaster 
     size        : 2971, 2971, 4  (nrow, ncol, nlyr)
     resolution  : 1, 1  (x, y)
@@ -137,7 +137,7 @@ images
     source      : imagem1.png 
     names       : imagem1_1, imagem1_2, imagem1_3, imagem1_4 
 
-    $`cropped-images/imagem2.png`
+    $imagem2
     class       : SpatRaster 
     size        : 2999, 2999, 4  (nrow, ncol, nlyr)
     resolution  : 1, 1  (x, y)
@@ -146,7 +146,7 @@ images
     source      : imagem2.png 
     names       : imagem2_1, imagem2_2, imagem2_3, imagem2_4 
 
-    $`cropped-images/imagem3.png`
+    $imagem3
     class       : SpatRaster 
     size        : 2999, 2999, 4  (nrow, ncol, nlyr)
     resolution  : 1, 1  (x, y)
@@ -155,7 +155,7 @@ images
     source      : imagem3.png 
     names       : imagem3_1, imagem3_2, imagem3_3, imagem3_4 
 
-    $`cropped-images/imagem4.png`
+    $imagem4
     class       : SpatRaster 
     size        : 3000, 3000, 4  (nrow, ncol, nlyr)
     resolution  : 1, 1  (x, y)
@@ -171,7 +171,8 @@ Next, lets visualize every image, using a `purrr::map()` loop, through
 
 ``` r
 purrr::map(.x = images, ~ ggplot() + 
-             tidyterra::geom_spatraster_rgb(data = .x) + theme_void(),
+             tidyterra::geom_spatraster_rgb(data = .x) + 
+             theme_void(),
            .progress = TRUE)
 ```
 
@@ -180,22 +181,22 @@ purrr::map(.x = images, ~ ggplot() +
     <SpatRaster> resampled to 501264 cells.
     <SpatRaster> resampled to 501264 cells.
 
-    $`cropped-images/imagem1.png`
+    $imagem1
 
 ![](README_files/figure-commonmark/unnamed-chunk-4-1.png)
 
 
-    $`cropped-images/imagem2.png`
+    $imagem2
 
 ![](README_files/figure-commonmark/unnamed-chunk-4-2.png)
 
 
-    $`cropped-images/imagem3.png`
+    $imagem3
 
 ![](README_files/figure-commonmark/unnamed-chunk-4-3.png)
 
 
-    $`cropped-images/imagem4.png`
+    $imagem4
 
 ![](README_files/figure-commonmark/unnamed-chunk-4-4.png)
 
@@ -248,22 +249,22 @@ purrr::map(images, coiR::coir_crop,
 
 ![](README_files/figure-commonmark/unnamed-chunk-7-1.png)
 
-     ■■■■■■■■■                         25% |  ETA: 10s
+     ■■■■■■■■■                         25% |  ETA: 16s
     <SpatRaster> resampled to 501264 cells.
 
 ![](README_files/figure-commonmark/unnamed-chunk-7-2.png)
 
-     ■■■■■■■■■■■■■■■■                  50% |  ETA:  7s
+     ■■■■■■■■■■■■■■■■                  50% |  ETA: 10s
     <SpatRaster> resampled to 501264 cells.
 
 ![](README_files/figure-commonmark/unnamed-chunk-7-3.png)
 
-     ■■■■■■■■■■■■■■■■■■■■■■■           75% |  ETA:  4s
+     ■■■■■■■■■■■■■■■■■■■■■■■           75% |  ETA:  5s
     <SpatRaster> resampled to 501264 cells.
 
 ![](README_files/figure-commonmark/unnamed-chunk-7-4.png)
 
-    $`cropped-images/imagem1.png`
+    $imagem1
     class       : SpatRaster 
     size        : 2971, 2971, 4  (nrow, ncol, nlyr)
     resolution  : 1, 1  (x, y)
@@ -275,7 +276,7 @@ purrr::map(images, coiR::coir_crop,
     min values  :         0,         0,         0,         0 
     max values  :       246,       255,       255,       255 
 
-    $`cropped-images/imagem2.png`
+    $imagem2
     class       : SpatRaster 
     size        : 2999, 2999, 4  (nrow, ncol, nlyr)
     resolution  : 1, 1  (x, y)
@@ -287,7 +288,7 @@ purrr::map(images, coiR::coir_crop,
     min values  :         0,         0,         0,         0 
     max values  :       255,       255,       255,       255 
 
-    $`cropped-images/imagem3.png`
+    $imagem3
     class       : SpatRaster 
     size        : 2999, 2999, 4  (nrow, ncol, nlyr)
     resolution  : 1, 1  (x, y)
@@ -299,7 +300,7 @@ purrr::map(images, coiR::coir_crop,
     min values  :         0,         0,         0,         0 
     max values  :       255,       255,       255,       255 
 
-    $`cropped-images/imagem4.png`
+    $imagem4
     class       : SpatRaster 
     size        : 3000, 3000, 4  (nrow, ncol, nlyr)
     resolution  : 1, 1  (x, y)
@@ -352,22 +353,22 @@ purrr::map(.x = images, ~ coiR::coir_crop(data = .x,
 
 ![](README_files/figure-commonmark/unnamed-chunk-9-1.png)
 
-     ■■■■■■■■■                         25% |  ETA: 26s
+     ■■■■■■■■■                         25% |  ETA: 35s
     <SpatRaster> resampled to 501264 cells.
 
 ![](README_files/figure-commonmark/unnamed-chunk-9-2.png)
 
-     ■■■■■■■■■■■■■■■■                  50% |  ETA: 17s
+     ■■■■■■■■■■■■■■■■                  50% |  ETA: 23s
     <SpatRaster> resampled to 501264 cells.
 
 ![](README_files/figure-commonmark/unnamed-chunk-9-3.png)
 
-     ■■■■■■■■■■■■■■■■■■■■■■■           75% |  ETA:  9s
+     ■■■■■■■■■■■■■■■■■■■■■■■           75% |  ETA: 12s
     <SpatRaster> resampled to 501264 cells.
 
 ![](README_files/figure-commonmark/unnamed-chunk-9-4.png)
 
-    $`cropped-images/imagem1.png`
+    $imagem1
     class       : SpatRaster 
     size        : 2971, 2971, 1  (nrow, ncol, nlyr)
     resolution  : 1, 1  (x, y)
@@ -378,7 +379,7 @@ purrr::map(.x = images, ~ coiR::coir_crop(data = .x,
     min value   :        0 
     max value   :        1 
 
-    $`cropped-images/imagem2.png`
+    $imagem2
     class       : SpatRaster 
     size        : 2999, 2999, 1  (nrow, ncol, nlyr)
     resolution  : 1, 1  (x, y)
@@ -389,7 +390,7 @@ purrr::map(.x = images, ~ coiR::coir_crop(data = .x,
     min value   :        0 
     max value   :        1 
 
-    $`cropped-images/imagem3.png`
+    $imagem3
     class       : SpatRaster 
     size        : 2999, 2999, 1  (nrow, ncol, nlyr)
     resolution  : 1, 1  (x, y)
@@ -400,7 +401,7 @@ purrr::map(.x = images, ~ coiR::coir_crop(data = .x,
     min value   :        0 
     max value   :        1 
 
-    $`cropped-images/imagem4.png`
+    $imagem4
     class       : SpatRaster 
     size        : 3000, 3000, 1  (nrow, ncol, nlyr)
     resolution  : 1, 1  (x, y)
@@ -428,26 +429,25 @@ single_image |>
     [1] 0.51
 
 As previously made, we can also do for multiple images, making a
-function in `purrr::map()` function, to flat output to a numeric vector.
+function in `purrr::map_dbl()` function, to flat output to a numeric
+vector.
 
 ``` r
-purrr::map_dbl(.x = images, ~coiR::coir_crop(data = .x,
-                                             plot = FALSE) |>
+purrr::map_dbl(.x = images, ~ .x |> 
+                 coiR::coir_crop(plot = FALSE) |>
                  coiR::coir_binarize(plot = FALSE) |>
                  coiR::coir_index(),
                .progress = TRUE)
 ```
 
-     ■■■■■■■■■                         25% |  ETA: 20s
+     ■■■■■■■■■                         25% |  ETA: 23s
 
-     ■■■■■■■■■■■■■■■■                  50% |  ETA: 13s
+     ■■■■■■■■■■■■■■■■                  50% |  ETA: 15s
 
-     ■■■■■■■■■■■■■■■■■■■■■■■           75% |  ETA:  7s
+     ■■■■■■■■■■■■■■■■■■■■■■■           75% |  ETA:  8s
 
-    cropped-images/imagem1.png cropped-images/imagem2.png 
-                          0.51                       0.54 
-    cropped-images/imagem3.png cropped-images/imagem4.png 
-                          0.31                       0.31 
+    imagem1 imagem2 imagem3 imagem4 
+       0.51    0.54    0.31    0.31 
 
 Additionally, we can set all COI values into a vector, to make a
 dataframe. We use `purrr::map_dbl()` to flat outputs to a numeric
@@ -461,20 +461,16 @@ places.
 > them into a contained folder, where images file names got a pattern.
 
 ``` r
-vector_index <- purrr::map_dbl(images, \(images){
-  
-  images |> 
-    coiR::coir_crop(plot = FALSE) |>
-    coiR::coir_binarize(plot = FALSE) |> 
-    coiR::coir_index(round = 3)
-  
-  },
-  .progress = TRUE)
+vector_index <- purrr::map_dbl(.x = images, ~ .x |> 
+                                 coiR::coir_crop(plot = FALSE) |>
+                                 coiR::coir_binarize(plot = FALSE) |> 
+                                 coiR::coir_index(round = 3),
+                               .progress = TRUE)
 ```
 
-     ■■■■■■■■■                         25% |  ETA: 19s
+     ■■■■■■■■■                         25% |  ETA: 20s
 
-     ■■■■■■■■■■■■■■■■                  50% |  ETA: 13s
+     ■■■■■■■■■■■■■■■■                  50% |  ETA: 14s
 
      ■■■■■■■■■■■■■■■■■■■■■■■           75% |  ETA:  7s
 
@@ -482,10 +478,8 @@ vector_index <- purrr::map_dbl(images, \(images){
 vector_index
 ```
 
-    cropped-images/imagem1.png cropped-images/imagem2.png 
-                         0.507                      0.540 
-    cropped-images/imagem3.png cropped-images/imagem4.png 
-                         0.310                      0.308 
+    imagem1 imagem2 imagem3 imagem4 
+      0.507   0.540   0.310   0.308 
 
 Finally, we make a data frame with those values.
 
@@ -502,9 +496,9 @@ df_index
 ```
 
     # A tibble: 4 × 2
-      id                         Index
-      <chr>                      <dbl>
-    1 cropped-images/imagem1.png 0.507
-    2 cropped-images/imagem2.png 0.54 
-    3 cropped-images/imagem3.png 0.31 
-    4 cropped-images/imagem4.png 0.308
+      id      Index
+      <chr>   <dbl>
+    1 imagem1 0.507
+    2 imagem2 0.54 
+    3 imagem3 0.31 
+    4 imagem4 0.308
