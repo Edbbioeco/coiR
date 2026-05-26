@@ -40,7 +40,7 @@ library(coiR)
 
     Carregando pacotes exigidos: terra
 
-    terra 1.8.93
+    terra 1.9.11
 
     Carregando pacotes exigidos: tidyterra
 
@@ -51,63 +51,38 @@ library(coiR)
 
         filter
 
-    Carregando pacotes exigidos: dplyr
+    Carregando pacotes exigidos: tidyverse
 
-
-    Anexando pacote: 'dplyr'
-
-    Os seguintes objetos são mascarados por 'package:terra':
-
-        intersect, union
-
-    Os seguintes objetos são mascarados por 'package:stats':
-
-        filter, lag
-
-    Os seguintes objetos são mascarados por 'package:base':
-
-        intersect, setdiff, setequal, union
-
-    Carregando pacotes exigidos: tidyr
-
-
-    Anexando pacote: 'tidyr'
-
-    O seguinte objeto é mascarado por 'package:terra':
-
-        extract
-
+    ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+    ✔ dplyr     1.2.1     ✔ readr     2.2.0
+    ✔ forcats   1.0.1     ✔ stringr   1.6.0
+    ✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+    ✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+    ✔ purrr     1.2.2     
+    ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+    ✖ tidyr::extract() masks terra::extract()
+    ✖ dplyr::filter()  masks tidyterra::filter(), stats::filter()
+    ✖ dplyr::lag()     masks stats::lag()
+    ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
     Carregando pacotes exigidos: magrittr
 
 
     Anexando pacote: 'magrittr'
 
+
+    O seguinte objeto é mascarado por 'package:purrr':
+
+        set_names
+
+
     O seguinte objeto é mascarado por 'package:tidyr':
 
         extract
 
+
     Os seguintes objetos são mascarados por 'package:terra':
 
         extract, inset
-
-    Carregando pacotes exigidos: forcats
-
-    Carregando pacotes exigidos: ggplot2
-
-    Carregando pacotes exigidos: purrr
-
-
-    Anexando pacote: 'purrr'
-
-    O seguinte objeto é mascarado por 'package:magrittr':
-
-        set_names
-
-    Carregando pacotes exigidos: readr
-
-    Carregando pacotes exigidos: stringr
-
-    Carregando pacotes exigidos: tibble
 
 ``` r
 library(terra)
@@ -140,7 +115,8 @@ files
 
 ``` r
 images <- purrr::map(files,
-                     terra::rast)
+                     terra::rast) |> 
+  setNames(files)
 ```
 
     Warning: [rast] unknown extent
@@ -149,8 +125,6 @@ images <- purrr::map(files,
     Warning: [rast] unknown extent
 
 ``` r
-names(images) <- paste0("cropped-images/imagem", 1:4, ".png")
-
 images
 ```
 
@@ -196,7 +170,9 @@ Next, lets visualize every image, using a `purrr::map()` loop, through
 `ggplot` and `tidyterra::geom_spatraster_rgb()` function.
 
 ``` r
-purrr::map(images, function(data){ggplot() + tidyterra::geom_spatraster_rgb(data = data) + theme_void()})
+purrr::map(.x = images, ~ ggplot() + 
+             tidyterra::geom_spatraster_rgb(data = .x) + theme_void(),
+           .progress = TRUE)
 ```
 
     <SpatRaster> resampled to 501264 cells.
@@ -264,21 +240,25 @@ And we also can analyse multiple images from an one shot, using
 `purrr::map()` loop.
 
 ``` r
-purrr::map(images, coiR::coir_crop)
+purrr::map(images, coiR::coir_crop,
+           .progress = TRUE)
 ```
 
     <SpatRaster> resampled to 501264 cells.
 
 ![](README_files/figure-commonmark/unnamed-chunk-7-1.png)
 
+     ■■■■■■■■■                         25% |  ETA: 10s
     <SpatRaster> resampled to 501264 cells.
 
 ![](README_files/figure-commonmark/unnamed-chunk-7-2.png)
 
+     ■■■■■■■■■■■■■■■■                  50% |  ETA:  7s
     <SpatRaster> resampled to 501264 cells.
 
 ![](README_files/figure-commonmark/unnamed-chunk-7-3.png)
 
+     ■■■■■■■■■■■■■■■■■■■■■■■           75% |  ETA:  4s
     <SpatRaster> resampled to 501264 cells.
 
 ![](README_files/figure-commonmark/unnamed-chunk-7-4.png)
@@ -362,23 +342,27 @@ As previously made, we can binarize multiple images, making a function
 in our `purrr::map()` loop.
 
 ``` r
-purrr::map(images, function(images){coiR::coir_crop(data = images,
-                                                    plot = FALSE) |>
-    coiR::coir_binarize()})
+purrr::map(.x = images, ~ coiR::coir_crop(data = .x,
+                                          plot = FALSE) |>
+             coiR::coir_binarize(),
+           .progress = TRUE)
 ```
 
     <SpatRaster> resampled to 501264 cells.
 
 ![](README_files/figure-commonmark/unnamed-chunk-9-1.png)
 
+     ■■■■■■■■■                         25% |  ETA: 26s
     <SpatRaster> resampled to 501264 cells.
 
 ![](README_files/figure-commonmark/unnamed-chunk-9-2.png)
 
+     ■■■■■■■■■■■■■■■■                  50% |  ETA: 17s
     <SpatRaster> resampled to 501264 cells.
 
 ![](README_files/figure-commonmark/unnamed-chunk-9-3.png)
 
+     ■■■■■■■■■■■■■■■■■■■■■■■           75% |  ETA:  9s
     <SpatRaster> resampled to 501264 cells.
 
 ![](README_files/figure-commonmark/unnamed-chunk-9-4.png)
@@ -444,33 +428,32 @@ single_image |>
     [1] 0.51
 
 As previously made, we can also do for multiple images, making a
-function in `purrr::map()` function.
+function in `purrr::map()` function, to flat output to a numeric vector.
 
 ``` r
-purrr::map(images, function(images){coiR::coir_crop(data = images,
-                                                    plot = FALSE) |>
-    coiR::coir_binarize(plot = FALSE) |> 
-    coiR::coir_index()})
+purrr::map_dbl(.x = images, ~coiR::coir_crop(data = .x,
+                                             plot = FALSE) |>
+                 coiR::coir_binarize(plot = FALSE) |>
+                 coiR::coir_index(),
+               .progress = TRUE)
 ```
 
-    $`cropped-images/imagem1.png`
-    [1] 0.51
+     ■■■■■■■■■                         25% |  ETA: 20s
 
-    $`cropped-images/imagem2.png`
-    [1] 0.54
+     ■■■■■■■■■■■■■■■■                  50% |  ETA: 13s
 
-    $`cropped-images/imagem3.png`
-    [1] 0.31
+     ■■■■■■■■■■■■■■■■■■■■■■■           75% |  ETA:  7s
 
-    $`cropped-images/imagem4.png`
-    [1] 0.31
+    cropped-images/imagem1.png cropped-images/imagem2.png 
+                          0.51                       0.54 
+    cropped-images/imagem3.png cropped-images/imagem4.png 
+                          0.31                       0.31 
 
 Additionally, we can set all COI values into a vector, to make a
-dataframe. First, we make a null vector (`vector_index <- c()`). Next,
-we build a function, hyper declaring a new `vector_index` with `<<-`
-instead `<-`. For more values details, we set `round = 3` argument in
-`coiR::coir_index()` functions, to set decimal places. All in a
-`purrr::map()` loop.
+dataframe. We use `purrr::map_dbl()` to flat outputs to a numeric
+vector, named by `vector_index`. For more values details, we set
+`round = 3` argument in `coiR::coir_index()` functions, to set decimal
+places.
 
 > [!NOTE]
 >
@@ -478,39 +461,31 @@ instead `<-`. For more values details, we set `round = 3` argument in
 > them into a contained folder, where images file names got a pattern.
 
 ``` r
-vector_index <- c()
-
-multiple_index <- function(images, verbose = FALSE){
+vector_index <- purrr::map_dbl(images, \(images){
   
-  index <- images |> 
+  images |> 
     coiR::coir_crop(plot = FALSE) |>
     coiR::coir_binarize(plot = FALSE) |> 
     coiR::coir_index(round = 3)
   
-  vector_index <<- c(vector_index, index)
-  
-}
-
-purrr::map(images, multiple_index)
+  },
+  .progress = TRUE)
 ```
 
-    $`cropped-images/imagem1.png`
-    [1] 0.507
+     ■■■■■■■■■                         25% |  ETA: 19s
 
-    $`cropped-images/imagem2.png`
-    [1] 0.507 0.540
+     ■■■■■■■■■■■■■■■■                  50% |  ETA: 13s
 
-    $`cropped-images/imagem3.png`
-    [1] 0.507 0.540 0.310
-
-    $`cropped-images/imagem4.png`
-    [1] 0.507 0.540 0.310 0.308
+     ■■■■■■■■■■■■■■■■■■■■■■■           75% |  ETA:  7s
 
 ``` r
 vector_index
 ```
 
-    [1] 0.507 0.540 0.310 0.308
+    cropped-images/imagem1.png cropped-images/imagem2.png 
+                         0.507                      0.540 
+    cropped-images/imagem3.png cropped-images/imagem4.png 
+                         0.310                      0.308 
 
 Finally, we make a data frame with those values.
 
