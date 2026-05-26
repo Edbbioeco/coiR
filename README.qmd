@@ -57,7 +57,7 @@ files
 
 images <- purrr::map(files,
                      terra::rast) |> 
-  setNames(files)
+  setNames(paste0("imagem", 1:4))
 
 images
 ```
@@ -68,7 +68,8 @@ Next, lets visualize every image, using a `purrr::map()` loop, through `ggplot` 
 
 ```{r}
 purrr::map(.x = images, ~ ggplot() + 
-             tidyterra::geom_spatraster_rgb(data = .x) + theme_void(),
+             tidyterra::geom_spatraster_rgb(data = .x) + 
+             theme_void(),
            .progress = TRUE)
 ```
 
@@ -128,11 +129,11 @@ single_image |>
   coiR::coir_index()
 ```
 
-As previously made, we can also do for multiple images, making a function in `purrr::map()` function, to flat output to a numeric vector.
+As previously made, we can also do for multiple images, making a function in `purrr::map_dbl()` function, to flat output to a numeric vector.
 
 ```{r}
-purrr::map_dbl(.x = images, ~coiR::coir_crop(data = .x,
-                                             plot = FALSE) |>
+purrr::map_dbl(.x = images, ~ .x |> 
+                 coiR::coir_crop(plot = FALSE) |>
                  coiR::coir_binarize(plot = FALSE) |>
                  coiR::coir_index(),
                .progress = TRUE)
@@ -145,15 +146,11 @@ A good practice to assist loops for images in coiR package is store them into a 
 :::
 
 ```{r}
-vector_index <- purrr::map_dbl(images, \(images){
-  
-  images |> 
-    coiR::coir_crop(plot = FALSE) |>
-    coiR::coir_binarize(plot = FALSE) |> 
-    coiR::coir_index(round = 3)
-  
-  },
-  .progress = TRUE)
+vector_index <- purrr::map_dbl(.x = images, ~ .x |> 
+                                 coiR::coir_crop(plot = FALSE) |>
+                                 coiR::coir_binarize(plot = FALSE) |> 
+                                 coiR::coir_index(round = 3),
+                               .progress = TRUE)
 
 vector_index
 ```
