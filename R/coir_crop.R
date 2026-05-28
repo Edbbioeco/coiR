@@ -32,16 +32,14 @@
 #' 
 #' # Crop multiple images
 #' 
-#' crop_images <- function(images){
+#' purrr::map(images, \(images){
 #' 
 #'  croppeds <- images |> 
 #'    coiR::coir_crop()
 #'    
 #'  print(croppeds)
-#' 
-#' }
-#' 
-#' purrr::walk(images, crop_images)
+#'  
+#'  })
 #'
 #' @export
 

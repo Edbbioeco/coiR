@@ -44,7 +44,7 @@ image_index
 
 # Binarize multiple images
 
-indeces_images <- function(images){
+purrr::map(images, \(images){
 
  index <- images |>
   coiR::coir_crop() |> 
@@ -52,9 +52,7 @@ indeces_images <- function(images){
   coiR::coir_index()
    
  print(index)
-
-}
-
-purrr::walk(images, indeces_images)
+ 
+ })
 
 }

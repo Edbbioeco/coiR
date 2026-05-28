@@ -32,16 +32,14 @@ images <- coiR::data_coir()
 
 # Visualizing data
 
-visualizing_images <- function(image){
+purrr::map(images, \(image){
 
   ggplt <- ggplot() +
    tidyterra::geom_spatraster_rgb(data = image) +
    theme_void()
   
   print(ggplt)
-
-}
-
-purrr::walk(images, visualizing_images)
+  
+  })
 
 }

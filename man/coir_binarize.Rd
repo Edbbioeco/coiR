@@ -45,16 +45,14 @@ binarized_image
 
 # Binarize multiple images
 
-binarize_images <- function(images){
+purrr::map(images, \(images){
 
  binarized <- images |> 
    coiR::coir_crop() |> 
    coiR::coir_binarize()
    
  print(binarized)
-
-}
-
-purrr::walk(images, binarize_images)
+ 
+ })
 
 }
