@@ -13,7 +13,6 @@ Description: That package allow to analyze canopy fisheye images, crop them into
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.3.3
 Depends: 
     R (>= 4.1),
     terra,
@@ -44,3 +43,4 @@ Imports:
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+Config/roxygen2/version: 8.0.0
