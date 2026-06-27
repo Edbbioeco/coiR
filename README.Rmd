@@ -49,7 +49,7 @@ library(tidyterra)
 
 ## Importing 
 
-Now, we need to import our data. Images may be shotten photos, as .png, .jpg or .jpeg files. first, we informe images directory (`files`), and import them using `terra::rast()` function for every image, throught a loop with `purrr::map()` function. Our images (`images`) are setted as a list class object.
+Now, we need to import our data Images may be shotten photos, as .png, .jpg or .jpeg files. first, we informe images directory (`files`), and import them using `terra::rast()` function for every image, throught a loop with `purrr::map()` function. Our images (`images`) are setted as a list class object.
 
 ```{r}
 files <- paste0("cropped-images/imagem", 1:4, ".png")
