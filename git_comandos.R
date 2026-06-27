@@ -9,12 +9,12 @@ gert::git_status() |>
 
 # Adicionando os arquivos ----
 
-gert::git_add(list.files(pattern = "git_")) |> 
+gert::git_add(list.files(pattern = "renderizar_quarto.R")) |> 
   as.data.frame() 
 
 # Commitar ----
 
-gert::git_commit("Script para comandos de Git")
+gert::git_commit("Script para rendizar o Quarto README.qmd")
 
 # Pushar ----
 
@@ -28,4 +28,4 @@ gert::git_pull(remote = "coiR")
 
 gert::git_reset_mixed()
 
-gert::git_reset_soft("HEAD^")
+gert::git_reset_soft("HEAD^1")

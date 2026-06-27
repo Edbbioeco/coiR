@@ -85,7 +85,8 @@ coir_binarize <- function(data, threshold = 0.5, plot = TRUE) {
       tidyterra::geom_spatraster(data = imagem_bi) +
       scale_fill_viridis_c(na.value = "transparent",
                            breaks = c(0, 1)) +
-      theme_void()
+      theme_void() +
+      theme(legend.position = "none")
     
     print(ggplt)
     
