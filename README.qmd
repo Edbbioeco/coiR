@@ -1,8 +1,15 @@
 ---
-title: "README"
+title: "coiR"
+author: "Edson Silva-Júnior"
+date: "`r Sys.Date()`"
 format: gfm
-editor: visual
+execute:
+  warning: false
 ---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 
 # [coiR](https://github.com/Edbbioeco/coiR)<img src="logo_coiR.png" align = "right" width="150">
 
@@ -26,11 +33,7 @@ devtools::install_github("Edbbioeco/coiR")
 
 - [ggplot2](https://ggplot2.tidyverse.org): create elegant graphs for imported images;
 
-- [tidyterra](https://dieghernan.github.io/tidyterra/): visualize RGB raster.
-
-:::{.callout-important}
-Before load packages, make sure they are previously downloaded.
-:::
+- [tidyterra](https://dieghernan.github.io/tidyterra/): visualize RGB raster
 
 ```{r}
 library(coiR)
@@ -48,7 +51,7 @@ library(tidyterra)
 
 ## Importing 
 
-Now, we need to import our data. Images may be shotten photos, as .png, .jpg or .jpeg files. first, we informe images directory (`files`), and import them using `terra::rast()` function for every image, throught a loop with `purrr::map()` function. Our images (`images`) are setted as a list class object.
+Now, we need to import our data Images may be shotten photos, as .png, .jpg or .jpeg files. first, we informe images directory (`files`), and import them using `terra::rast()` function for every image, throught a loop with `purrr::map()` function. Our images (`images`) are setted as a list class object.
 
 ```{r}
 files <- paste0("cropped-images/imagem", 1:4, ".png")
@@ -56,8 +59,9 @@ files <- paste0("cropped-images/imagem", 1:4, ".png")
 files
 
 images <- purrr::map(files,
-                     terra::rast) |> 
-  setNames(paste0("imagem", 1:4))
+                     terra::rast)
+
+names(images) <- paste0("cropped-images/imagem", 1:4, ".png")
 
 images
 ```
@@ -67,10 +71,7 @@ images
 Next, lets visualize every image, using a `purrr::map()` loop, through `ggplot` and `tidyterra::geom_spatraster_rgb()` function.
 
 ```{r}
-purrr::map(.x = images, ~ ggplot() + 
-             tidyterra::geom_spatraster_rgb(data = .x) + 
-             theme_void(),
-           .progress = TRUE)
+purrr::map(images, function(data){ggplot() + tidyterra::geom_spatraster_rgb(data = data) + theme_void()})
 ```
 
 # Canopy Openness Index 
@@ -95,8 +96,7 @@ single_image |>
 And we also can analyse multiple images from an one shot, using `purrr::map()` loop.
 
 ```{r}
-purrr::map(images, coiR::coir_crop,
-           .progress = TRUE)
+purrr::map(images, coiR::coir_crop)
 ```
 
 ## Binarize images
@@ -112,10 +112,9 @@ single_image |>
 As previously made, we can binarize multiple images, making a function in our `purrr::map()` loop.
 
 ```{r}
-purrr::map(.x = images, ~ coiR::coir_crop(data = .x,
-                                          plot = FALSE) |>
-             coiR::coir_binarize(),
-           .progress = TRUE)
+purrr::map(images, function(images){coiR::coir_crop(data = images,
+                                                    plot = FALSE) |>
+    coiR::coir_binarize()})
 ```
 
 ## Index
@@ -129,37 +128,37 @@ single_image |>
   coiR::coir_index()
 ```
 
-As previously made, we can also do for multiple images, making a function in `purrr::map_dbl()` function, to flat output to a numeric vector.
+As previously made, we can also do for multiple images, making a function in `purrr::map()` function.
 
 ```{r}
-purrr::map_dbl(.x = images, ~ .x |> 
-                 coiR::coir_crop(plot = FALSE) |>
-                 coiR::coir_binarize(plot = FALSE) |>
-                 coiR::coir_index(),
-               .progress = TRUE)
+purrr::map(images, function(images){coiR::coir_crop(data = images,
+                                                    plot = FALSE) |>
+    coiR::coir_binarize(plot = FALSE) |> 
+    coiR::coir_index()})
 ```
 
-Additionally, we can set all COI values into a vector, to make a dataframe. We use `purrr::map_dbl()` to flat outputs to a numeric vector, named by `vector_index`. For more values details, we set `round = 3` argument in `coiR::coir_index()` functions, to set decimal places.
-
-:::{.callout-note}
-A good practice to assist loops for images in coiR package is store them into a contained folder, where images file names got a pattern.
-:::
+Additionally, we can set all COI values into a vector, to make a dataframe. First, we make a null vector (`vector_index <- c()`). Next, we build a function, hyper declaring a new `vector_index` with `<<-` instead `<-`. For more values details, we set `round = 3` argument in `coiR::coir_index()` functions, to set decimal places. All in a `purrr::map()` loop.
 
 ```{r}
-vector_index <- purrr::map_dbl(.x = images, ~ .x |> 
-                                 coiR::coir_crop(plot = FALSE) |>
-                                 coiR::coir_binarize(plot = FALSE) |> 
-                                 coiR::coir_index(round = 3),
-                               .progress = TRUE)
+vector_index <- c()
+
+multiple_index <- function(images, verbose = FALSE){
+  
+  index <- images |> 
+    coiR::coir_crop(plot = FALSE) |>
+    coiR::coir_binarize(plot = FALSE) |> 
+    coiR::coir_index(round = 3)
+  
+  vector_index <<- c(vector_index, index)
+  
+}
+
+purrr::map(images, multiple_index)
 
 vector_index
 ```
 
-Finally, we make a data frame with those values.
-
-:::{.callout-note}
-That data frame can be exported for different file formats, such as .xlsx or .csv. That practice assists save analysis results.
-:::
+Finally, we make a dtaframe with those values.
 
 ```{r}
 df_index <- tibble::tibble(id = images |> names(),
