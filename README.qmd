@@ -120,9 +120,15 @@ single_image |>
 As previously made, we can binarize multiple images, making a function in our `purrr::map()` loop.
 
 ```{r}
-purrr::map(images, function(images){coiR::coir_crop(data = images,
-                                                    plot = FALSE) |>
-    coiR::coir_binarize()})
+purrr::map(images, 
+           purrr::in_parallel(
+             
+             ~coiR::coir_crop(data = .x,
+                              plot = FALSE) |>
+               coiR::coir_binarize()
+             
+             ),
+           .progress = TRUE)
 ```
 
 ## Index
