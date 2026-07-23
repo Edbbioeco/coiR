@@ -157,33 +157,27 @@ purrr::map_dbl(images,
       .progress = TRUE)
 ```
 
-Additionally, we can set all COI values into a vector, to make a dataframe. First, we make a null vector (`vector_index <- c()`). Next, we build a function, hyper declaring a new `vector_index` with `<<-` instead `<-`. For more values details, we set `round = 3` argument in `coiR::coir_index()` functions, to set decimal places. All in a `purrr::map()` loop.
+Finally, we make a data rame with those values, using `purrr::imap_dfr()`, to get image names.
 
 ```{r}
-vector_index <- c()
-
-multiple_index <- function(images, verbose = FALSE){
-  
-  index <- images |> 
-    coiR::coir_crop(plot = FALSE) |>
-    coiR::coir_binarize(plot = FALSE) |> 
-    coiR::coir_index(round = 3)
-  
-  vector_index <<- c(vector_index, index)
-  
-}
-
-purrr::map(images, multiple_index)
-
-vector_index
-```
-
-Finally, we make a dtaframe with those values.
-
-```{r}
-df_index <- tibble::tibble(id = images |> names(),
-                           Index = vector_index)
+df_index <- purrr::imap_dfr(
+  images, 
+  purrr::in_parallel(
+    
+    \(imagem, nome){
+      
+      index <- imagem |> 
+        coiR::coir_crop(plot = FALSE) |>
+        coiR::coir_binarize(plot = FALSE) |> 
+        coiR::coir_index(round = 3)
+      
+      tibble::tibble(id = nome,
+                     Index = index)
+      
+      }
+    
+    ),
+  .progress = TRUE)
 
 df_index
 ```
-
