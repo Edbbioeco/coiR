@@ -142,13 +142,19 @@ single_image |>
   coiR::coir_index()
 ```
 
-As previously made, we can also do for multiple images, making a function in `purrr::map()` function.
+As previously made, we can also do for multiple images, making a function in `purrr::map_dbl()` function.
 
 ```{r}
-purrr::map(images, function(images){coiR::coir_crop(data = images,
-                                                    plot = FALSE) |>
-    coiR::coir_binarize(plot = FALSE) |> 
-    coiR::coir_index()})
+purrr::map_dbl(images, 
+               purrr::in_parallel(
+                 
+      ~coiR::coir_crop(data = .x,
+                       plot = FALSE) |>
+        coiR::coir_binarize(plot = FALSE) |> 
+        coiR::coir_index()
+             
+             ),
+      .progress = TRUE)
 ```
 
 Additionally, we can set all COI values into a vector, to make a dataframe. First, we make a null vector (`vector_index <- c()`). Next, we build a function, hyper declaring a new `vector_index` with `<<-` instead `<-`. For more values details, we set `round = 3` argument in `coiR::coir_index()` functions, to set decimal places. All in a `purrr::map()` loop.
