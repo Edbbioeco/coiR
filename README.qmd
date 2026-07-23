@@ -59,9 +59,8 @@ files <- paste0("cropped-images/imagem", 1:4, ".png")
 files
 
 images <- purrr::map(files,
-                     terra::rast)
-
-names(images) <- paste0("cropped-images/imagem", 1:4, ".png")
+                     terra::rast) |> 
+  setNames(paste0("cropped-images/imagem", 1:4, ".png"))
 
 images
 ```
