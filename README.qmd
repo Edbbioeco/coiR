@@ -71,7 +71,15 @@ images
 Next, lets visualize every image, using a `purrr::map()` loop, through `ggplot` and `tidyterra::geom_spatraster_rgb()` function.
 
 ```{r}
-purrr::map(images, function(data){ggplot() + tidyterra::geom_spatraster_rgb(data = data) + theme_void()})
+purrr::map(images, 
+           purrr::in_parallel(
+             
+             ~ggplot() + 
+               tidyterra::geom_spatraster_rgb(data = .x) + 
+               theme_void()
+             
+             ),
+           .progress = TRUE)
 ```
 
 # Canopy Openness Index 
