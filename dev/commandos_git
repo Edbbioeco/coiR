@@ -1,0 +1,19 @@
+# Preparar todos os arquivos
+
+git add .
+
+# Preparar um arquivo em específico 
+
+git add ""
+
+# Commitar 
+
+git commit -m "mensagem de commit"
+
+# Pushar 
+
+git pushh
+
+# Pullar
+
+git pull
