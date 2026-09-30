@@ -1,6 +1,6 @@
 Package: coiR
 Type: Package
-Title: Package to analyze Canopy Openness Index (COI)
+Title: Analysis of Canopy Openness Index from Fisheye Images
 Version: 0.1.0
 Authors@R: c(
     person(
@@ -9,38 +9,20 @@ Authors@R: c(
       role = c("aut", "cre")
     )
   )
-Description: That package allow to analyze canopy fisheye images, crop them into circular images, and calculate its Canopy Openness Index (COI), a widley used methodology to understand forest proprieties, as brightness and protection against solar radiation.
+Description: Provides tools to crop, binarize, and analyze fisheye canopy images to calculate the Canopy Openness Index ("COI""). The package includes functions widely applicable in forest ecology studies.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends: 
-    R (>= 4.1),
-    terra,
-    tidyterra,
-    tidyverse,
-    dplyr,
-    tidyr,
-    magrittr,
-    forcats,
-    ggplot2,
-    purrr,
-    readr,
-    stringr,
-    tibble
+    R (>= 4.1)
 Imports:
+    ggplot2,
+    dplyr,
     terra,
     tidyterra,
-    tidyverse,
-    dplyr,
-    tidyr,
-    magrittr,
-    forcats,
-    ggplot2,
-    purrr,
-    readr,
-    stringr,
-    tibble
+    rlang
 Suggests: 
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    purrr
 Config/testthat/edition: 3
-Config/roxygen2/version: 8.0.0
+Config/roxygen2/version: 8.1.0
