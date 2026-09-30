@@ -35,6 +35,7 @@ image_single <- images[[1]]
 
 # Get image index
 
+\donttest{
 image_index <- image_single |>
  coiR::coir_crop() |>
  coiR::coir_binarize() |>
@@ -54,5 +55,6 @@ purrr::map(images, \(caminho){
  print(index)
 
  })
+ }
 
 }

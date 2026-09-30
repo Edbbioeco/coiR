@@ -29,21 +29,16 @@ library(purrr)
 
 # Importing data
 
+\donttest{
 images <- coiR::data_coir()
 
-# Isolating a one single image
-
 image_single <- images[[1]]
-
-# binarize image
 
 binarized_image <- image_single |>
  coiR::coir_crop() |>
  coiR::coir_binarize()
 
 binarized_image
-
-# Binarize multiple images
 
 purrr::map(images, \(caminho){
 
@@ -54,5 +49,6 @@ purrr::map(images, \(caminho){
  print(binarized)
 
  })
+}
 
 }

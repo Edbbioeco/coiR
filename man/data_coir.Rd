@@ -26,9 +26,10 @@ library(coiR)
 
 # Importing data
 
+\donttest{
 images <- coiR::data_coir()
 
-# Visualizing data
+# Visualizing
 
 purrr::map(images, \(caminho){
 
@@ -40,5 +41,6 @@ purrr::map(images, \(caminho){
   print(ggplt)
 
   })
+}
 
 }

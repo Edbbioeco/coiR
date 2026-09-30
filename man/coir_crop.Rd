@@ -27,6 +27,7 @@ library(purrr)
 
 # Importing data
 
+\donttest{
 images <- coiR::data_coir()
 
 # Isolating a one single image
@@ -49,5 +50,6 @@ purrr::map(images, \(caminho){
  print(croppeds)
 
  })
+ }
 
 }
