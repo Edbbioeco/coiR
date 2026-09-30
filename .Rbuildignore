@@ -3,3 +3,9 @@
 ^\.positai$
 ^\.claude$
 ^coiR\.Rproj$
+^LICENSE\.md$
+^dev$
+^README\.html$
+^README\.qmd$
+^README_files$
+^README\.Rmd$
