@@ -32,9 +32,9 @@
 #'
 #' # Crop multiple images
 #'
-#' purrr::map(images, \(images){
+#' purrr::map(images, \(caminho){
 #'
-#'  croppeds <- images |>
+#'  croppeds <- caminho |>
 #'    coiR::coir_crop()
 #'
 #'  print(croppeds)
@@ -69,7 +69,7 @@ coir_crop <- function(data, plot = TRUE) {
 
   if(plot == TRUE){
 
-    ggimagem_crop <- ggplot() +
+    ggimagem_crop <- ggplot2::ggplot() +
       tidyterra::geom_spatraster_rgb(data = imagem_crop) +
       ggplot2::theme_void()
 

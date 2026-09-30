@@ -1,3 +1,6 @@
+#' @importFrom rlang .data
+NULL
+#'
 #' @title Binarize cropped square fisheye images
 #'
 #' @description To analyze Canopy Opennes Index (COI), we need to difference what is interpreted in the image as canopy and what is interpred as sky. As our images are usely RGB (colored) images, a first step is to decompond our images into a black-and-white image, where we get a gradient from black (usely, value = 0) to white (usely, value = 1). Next, to binarize our image consists only to set a threshold (usely, >= 0.5, but check details), where values < threshold are interpreted as canopy and values >= threshold are interpreted as sky.
@@ -36,9 +39,9 @@
 #'
 #' # Binarize multiple images
 #'
-#' purrr::map(images, \(images){
+#' purrr::map(images, \(caminho){
 #'
-#'  binarized <- images |>
+#'  binarized <- caminho |>
 #'    coiR::coir_crop() |>
 #'    coiR::coir_binarize()
 #'
@@ -67,7 +70,7 @@ coir_binarize <- function(data, threshold = 0.5, plot = TRUE) {
   names(imagem_bw) <- "variavel"
 
   imagem_bw_scale <- imagem_bw |>
-    tidyterra::mutate(variavel = variavel |>
+    tidyterra::mutate(variavel = .data$variavel |>
                         convert())
 
   imagem_bw_scale
@@ -75,13 +78,13 @@ coir_binarize <- function(data, threshold = 0.5, plot = TRUE) {
   ## Binarizando ----
 
   imagem_bi <- imagem_bw_scale |>
-    dplyr::mutate(variavel = ifelse(variavel >= threshold,
+    dplyr::mutate(variavel = ifelse(.data$variavel >= threshold,
                                     1,
                                     0))
 
   if(plot == TRUE){
 
-    ggplt <- ggplot() +
+    ggplt <- ggplot2::ggplot() +
       tidyterra::geom_spatraster(data = imagem_bi) +
       ggplot2::scale_fill_viridis_c(na.value = "transparent",
                                     breaks = c(0, 1)) +
