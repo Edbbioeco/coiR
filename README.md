@@ -1,6 +1,6 @@
 # coiR
 Edson Silva-Júnior
-2026-07-22
+2026-09-29
 
 # [coiR](https://github.com/Edbbioeco/coiR)<img src="logo_coiR.png" align = "right" width="150">
 
@@ -48,60 +48,50 @@ library(tidyterra)
 ## Importing
 
 Now, we need to import our data Images may be shotten photos, as .png,
-.jpg or .jpeg files. first, we informe images directory (`files`), and
-import them using `terra::rast()` function for every image, throught a
-loop with `purrr::map()` function. Our images (`images`) are setted as a
-list class object.
+.jpg or .jpeg files. first, we import package exemple data, using
+`coiR::coir_data()` function, and import them using `terra::rast()`
+function for every image, throught a loop with `purrr::map()` function.
+Our images (`images`) are setted as a list class object.
 
 ``` r
-files <- paste0("cropped-images/imagem", 1:4, ".png")
-
-files
-```
-
-    [1] "cropped-images/imagem1.png" "cropped-images/imagem2.png"
-    [3] "cropped-images/imagem3.png" "cropped-images/imagem4.png"
-
-``` r
-images <- purrr::map(files,
-                     terra::rast) |> 
-  setNames(paste0("cropped-images/imagem", 1:4, ".png"))
+images <- purrr::map(coiR::data_coir(),
+                     ~.x |> terra::rast())
 
 images
 ```
 
-    $`cropped-images/imagem1.png`
+    [[1]]
     class       : SpatRaster
-    size        : 2971, 2971, 4  (nrow, ncol, nlyr)
+    size        : 800, 800, 4  (nrow, ncol, nlyr)
     resolution  : 1, 1  (x, y)
-    extent      : 0, 2971, 0, 2971  (xmin, xmax, ymin, ymax)
+    extent      : 0, 800, 0, 800  (xmin, xmax, ymin, ymax)
     coord. ref. : 
     source      : imagem1.png
     names       : imagem1_1, imagem1_2, imagem1_3, imagem1_4
 
-    $`cropped-images/imagem2.png`
+    [[2]]
     class       : SpatRaster
-    size        : 2999, 2999, 4  (nrow, ncol, nlyr)
+    size        : 800, 800, 4  (nrow, ncol, nlyr)
     resolution  : 1, 1  (x, y)
-    extent      : 0, 2999, 0, 2999  (xmin, xmax, ymin, ymax)
+    extent      : 0, 800, 0, 800  (xmin, xmax, ymin, ymax)
     coord. ref. : 
     source      : imagem2.png
     names       : imagem2_1, imagem2_2, imagem2_3, imagem2_4
 
-    $`cropped-images/imagem3.png`
+    [[3]]
     class       : SpatRaster
-    size        : 2999, 2999, 4  (nrow, ncol, nlyr)
+    size        : 800, 800, 4  (nrow, ncol, nlyr)
     resolution  : 1, 1  (x, y)
-    extent      : 0, 2999, 0, 2999  (xmin, xmax, ymin, ymax)
+    extent      : 0, 800, 0, 800  (xmin, xmax, ymin, ymax)
     coord. ref. : 
     source      : imagem3.png
     names       : imagem3_1, imagem3_2, imagem3_3, imagem3_4
 
-    $`cropped-images/imagem4.png`
+    [[4]]
     class       : SpatRaster
-    size        : 3000, 3000, 4  (nrow, ncol, nlyr)
+    size        : 800, 800, 4  (nrow, ncol, nlyr)
     resolution  : 1, 1  (x, y)
-    extent      : 0, 3000, 0, 3000  (xmin, xmax, ymin, ymax)
+    extent      : 0, 800, 0, 800  (xmin, xmax, ymin, ymax)
     coord. ref. : 
     source      : imagem4.png
     names       : imagem4_1, imagem4_2, imagem4_3, imagem4_4
@@ -123,22 +113,22 @@ purrr::map(images,
            .progress = TRUE)
 ```
 
-    $`cropped-images/imagem1.png`
+    [[1]]
 
 ![](README_files/figure-commonmark/unnamed-chunk-4-1.png)
 
 
-    $`cropped-images/imagem2.png`
+    [[2]]
 
 ![](README_files/figure-commonmark/unnamed-chunk-4-2.png)
 
 
-    $`cropped-images/imagem3.png`
+    [[3]]
 
 ![](README_files/figure-commonmark/unnamed-chunk-4-3.png)
 
 
-    $`cropped-images/imagem4.png`
+    [[4]]
 
 ![](README_files/figure-commonmark/unnamed-chunk-4-4.png)
 
@@ -167,15 +157,15 @@ single_image |>
 ![](README_files/figure-commonmark/unnamed-chunk-6-1.png)
 
     class       : SpatRaster
-    size        : 2971, 2971, 4  (nrow, ncol, nlyr)
+    size        : 800, 800, 4  (nrow, ncol, nlyr)
     resolution  : 1, 1  (x, y)
-    extent      : 0, 2971, 0, 2971  (xmin, xmax, ymin, ymax)
+    extent      : 0, 800, 0, 800  (xmin, xmax, ymin, ymax)
     coord. ref. : 
     source(s)   : memory
     varname     : imagem1
     names       : imagem1_1, imagem1_2, imagem1_3, imagem1_4
-    min values  :         0,         0,         0,         0
-    max values  :       246,       255,       255,       255
+    min values  :         4,        25,        33,        29
+    max values  :       243,       241,       246,       255
 
 And we also can analyse multiple images from an one shot, using
 `purrr::map()` loop.
@@ -192,52 +182,52 @@ purrr::map(images, coiR::coir_crop)
 
 ![](README_files/figure-commonmark/unnamed-chunk-7-4.png)
 
-    $`cropped-images/imagem1.png`
+    [[1]]
     class       : SpatRaster
-    size        : 2971, 2971, 4  (nrow, ncol, nlyr)
+    size        : 800, 800, 4  (nrow, ncol, nlyr)
     resolution  : 1, 1  (x, y)
-    extent      : 0, 2971, 0, 2971  (xmin, xmax, ymin, ymax)
+    extent      : 0, 800, 0, 800  (xmin, xmax, ymin, ymax)
     coord. ref. : 
     source(s)   : memory
     varname     : imagem1
     names       : imagem1_1, imagem1_2, imagem1_3, imagem1_4
-    min values  :         0,         0,         0,         0
-    max values  :       246,       255,       255,       255
+    min values  :         4,        25,        33,        29
+    max values  :       243,       241,       246,       255
 
-    $`cropped-images/imagem2.png`
+    [[2]]
     class       : SpatRaster
-    size        : 2999, 2999, 4  (nrow, ncol, nlyr)
+    size        : 800, 800, 4  (nrow, ncol, nlyr)
     resolution  : 1, 1  (x, y)
-    extent      : 0, 2999, 0, 2999  (xmin, xmax, ymin, ymax)
+    extent      : 0, 800, 0, 800  (xmin, xmax, ymin, ymax)
     coord. ref. : 
     source(s)   : memory
     varname     : imagem2
     names       : imagem2_1, imagem2_2, imagem2_3, imagem2_4
-    min values  :         0,         0,         0,         0
+    min values  :         2,        21,        21,        29
     max values  :       255,       255,       255,       255
 
-    $`cropped-images/imagem3.png`
+    [[3]]
     class       : SpatRaster
-    size        : 2999, 2999, 4  (nrow, ncol, nlyr)
+    size        : 800, 800, 4  (nrow, ncol, nlyr)
     resolution  : 1, 1  (x, y)
-    extent      : 0, 2999, 0, 2999  (xmin, xmax, ymin, ymax)
+    extent      : 0, 800, 0, 800  (xmin, xmax, ymin, ymax)
     coord. ref. : 
     source(s)   : memory
     varname     : imagem3
     names       : imagem3_1, imagem3_2, imagem3_3, imagem3_4
-    min values  :         0,         0,         0,         0
+    min values  :         3,        19,         7,        29
     max values  :       255,       255,       255,       255
 
-    $`cropped-images/imagem4.png`
+    [[4]]
     class       : SpatRaster
-    size        : 3000, 3000, 4  (nrow, ncol, nlyr)
+    size        : 800, 800, 4  (nrow, ncol, nlyr)
     resolution  : 1, 1  (x, y)
-    extent      : 0, 3000, 0, 3000  (xmin, xmax, ymin, ymax)
+    extent      : 0, 800, 0, 800  (xmin, xmax, ymin, ymax)
     coord. ref. : 
     source(s)   : memory
     varname     : imagem4
     names       : imagem4_1, imagem4_2, imagem4_3, imagem4_4
-    min values  :         0,         0,         0,         5
+    min values  :         1,        13,         1,        30
     max values  :       255,       255,       255,       255
 
 ## Binarize images
@@ -256,9 +246,9 @@ single_image |>
 ![](README_files/figure-commonmark/unnamed-chunk-8-1.png)
 
     class       : SpatRaster
-    size        : 2971, 2971, 1  (nrow, ncol, nlyr)
+    size        : 800, 800, 1  (nrow, ncol, nlyr)
     resolution  : 1, 1  (x, y)
-    extent      : 0, 2971, 0, 2971  (xmin, xmax, ymin, ymax)
+    extent      : 0, 800, 0, 800  (xmin, xmax, ymin, ymax)
     coord. ref. : 
     source(s)   : memory
     name        : variavel
@@ -288,44 +278,44 @@ purrr::map(images,
 
 ![](README_files/figure-commonmark/unnamed-chunk-9-4.png)
 
-    $`cropped-images/imagem1.png`
+    [[1]]
     class       : SpatRaster
-    size        : 2971, 2971, 1  (nrow, ncol, nlyr)
+    size        : 800, 800, 1  (nrow, ncol, nlyr)
     resolution  : 1, 1  (x, y)
-    extent      : 0, 2971, 0, 2971  (xmin, xmax, ymin, ymax)
+    extent      : 0, 800, 0, 800  (xmin, xmax, ymin, ymax)
     coord. ref. : 
     source(s)   : memory
     name        : variavel
     min value   :        0
     max value   :        1
 
-    $`cropped-images/imagem2.png`
+    [[2]]
     class       : SpatRaster
-    size        : 2999, 2999, 1  (nrow, ncol, nlyr)
+    size        : 800, 800, 1  (nrow, ncol, nlyr)
     resolution  : 1, 1  (x, y)
-    extent      : 0, 2999, 0, 2999  (xmin, xmax, ymin, ymax)
+    extent      : 0, 800, 0, 800  (xmin, xmax, ymin, ymax)
     coord. ref. : 
     source(s)   : memory
     name        : variavel
     min value   :        0
     max value   :        1
 
-    $`cropped-images/imagem3.png`
+    [[3]]
     class       : SpatRaster
-    size        : 2999, 2999, 1  (nrow, ncol, nlyr)
+    size        : 800, 800, 1  (nrow, ncol, nlyr)
     resolution  : 1, 1  (x, y)
-    extent      : 0, 2999, 0, 2999  (xmin, xmax, ymin, ymax)
+    extent      : 0, 800, 0, 800  (xmin, xmax, ymin, ymax)
     coord. ref. : 
     source(s)   : memory
     name        : variavel
     min value   :        0
     max value   :        1
 
-    $`cropped-images/imagem4.png`
+    [[4]]
     class       : SpatRaster
-    size        : 3000, 3000, 1  (nrow, ncol, nlyr)
+    size        : 800, 800, 1  (nrow, ncol, nlyr)
     resolution  : 1, 1  (x, y)
-    extent      : 0, 3000, 0, 3000  (xmin, xmax, ymin, ymax)
+    extent      : 0, 800, 0, 800  (xmin, xmax, ymin, ymax)
     coord. ref. : 
     source(s)   : memory
     name        : variavel
@@ -346,7 +336,7 @@ single_image |>
   coiR::coir_index()
 ```
 
-    [1] 0.51
+    [1] 0.5
 
 As previously made, we can also do for multiple images, making a
 function in `purrr::map_dbl()` function.
@@ -364,10 +354,7 @@ purrr::map_dbl(images,
       .progress = TRUE)
 ```
 
-    cropped-images/imagem1.png cropped-images/imagem2.png 
-                          0.51                       0.54 
-    cropped-images/imagem3.png cropped-images/imagem4.png 
-                          0.31                       0.31 
+    [1] 0.50 0.52 0.28 0.29
 
 Finally, we make a data rame with those values, using
 `purrr::imap_dfr()`, to get image names.
@@ -396,9 +383,9 @@ df_index
 ```
 
     # A tibble: 4 × 2
-      id                         Index
-      <chr>                      <dbl>
-    1 cropped-images/imagem1.png 0.507
-    2 cropped-images/imagem2.png 0.54 
-    3 cropped-images/imagem3.png 0.31 
-    4 cropped-images/imagem4.png 0.308
+         id Index
+      <int> <dbl>
+    1     1 0.501
+    2     2 0.518
+    3     3 0.281
+    4     4 0.29 
