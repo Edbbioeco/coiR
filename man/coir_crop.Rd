@@ -41,13 +41,13 @@ cropped_image
 
 # Crop multiple images
 
-purrr::map(images, \(images){
+purrr::map(images, \(caminho){
 
- croppeds <- images |> 
+ croppeds <- caminho |>
    coiR::coir_crop()
-   
+
  print(croppeds)
- 
+
  })
 
 }

@@ -35,24 +35,24 @@ image_single <- images[[1]]
 
 # Get image index
 
-image_index <- image_single |> 
- coiR::coir_crop() |> 
- coiR::coir_binarize() |> 
+image_index <- image_single |>
+ coiR::coir_crop() |>
+ coiR::coir_binarize() |>
  coiR::coir_index()
 
 image_index
 
 # Binarize multiple images
 
-purrr::map(images, \(images){
+purrr::map(images, \(caminho){
 
- index <- images |>
-  coiR::coir_crop() |> 
-  coiR::coir_binarize() |> 
+ index <- caminho |>
+  coiR::coir_crop() |>
+  coiR::coir_binarize() |>
   coiR::coir_index()
-   
+
  print(index)
- 
+
  })
 
 }

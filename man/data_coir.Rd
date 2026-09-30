@@ -24,22 +24,21 @@ images are setted by a list of 4 rasters (SpatRast class). Pay attenction to exe
 
 library(coiR)
 
-library(purrr)
-
 # Importing data
 
 images <- coiR::data_coir()
 
 # Visualizing data
 
-purrr::map(images, \(image){
+purrr::map(images, \(caminho){
 
-  ggplt <- ggplot() +
-   tidyterra::geom_spatraster_rgb(data = image) +
-   theme_void()
-  
+  imagem <- caminho |> terra::rast()
+
+  ggplt <- ggplot2::ggplot() +
+   tidyterra::geom_spatraster_rgb(data = imagem)
+
   print(ggplt)
-  
+
   })
 
 }

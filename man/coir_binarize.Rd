@@ -37,22 +37,22 @@ image_single <- images[[1]]
 
 # binarize image
 
-binarized_image <- image_single |> 
- coiR::coir_crop() |> 
+binarized_image <- image_single |>
+ coiR::coir_crop() |>
  coiR::coir_binarize()
 
 binarized_image
 
 # Binarize multiple images
 
-purrr::map(images, \(images){
+purrr::map(images, \(caminho){
 
- binarized <- images |> 
-   coiR::coir_crop() |> 
+ binarized <- caminho |>
+   coiR::coir_crop() |>
    coiR::coir_binarize()
-   
+
  print(binarized)
- 
+
  })
 
 }
