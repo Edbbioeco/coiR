@@ -10,3 +10,4 @@
 ^README_files$
 ^README\.Rmd$
 ^logo_coiR\.png$
+^cran-comments\.md$
