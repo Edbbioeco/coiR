@@ -18,6 +18,7 @@
 #'
 #' # Importing data
 #'
+#' \donttest{
 #' images <- coiR::data_coir()
 #'
 #' # Isolating a one single image
@@ -40,6 +41,7 @@
 #'  print(croppeds)
 #'
 #'  })
+#'  }
 #'
 #' @export
 

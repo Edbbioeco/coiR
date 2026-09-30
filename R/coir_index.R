@@ -26,6 +26,7 @@
 #'
 #' # Get image index
 #'
+#' \donttest{
 #' image_index <- image_single |>
 #'  coiR::coir_crop() |>
 #'  coiR::coir_binarize() |>
@@ -45,6 +46,7 @@
 #'  print(index)
 #'
 #'  })
+#'  }
 #'
 #' @export
 

@@ -16,9 +16,10 @@
 #'
 #' # Importing data
 #'
+#' \donttest{
 #' images <- coiR::data_coir()
 #'
-#' # Visualizing data
+#' # Visualizing
 #'
 #' purrr::map(images, \(caminho){
 #'
@@ -30,6 +31,7 @@
 #'   print(ggplt)
 #'
 #'   })
+#' }
 #'
 #' @export
 #'
