@@ -19,6 +19,8 @@ Description: ools to estimate the Canopy Openness Index (COI) from
     (1999) "Assessing forest canopies and understorey illumination: canopy
     closure, canopy cover and other measures" <doi:10.1093/forestry/72.1.59>.
     Example canopy images are included so users can test the workflow.
+URL: https://github.com/Edbbioeco/coiR
+BugReports: https://github.com/Edbbioeco/coiR/issues
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
