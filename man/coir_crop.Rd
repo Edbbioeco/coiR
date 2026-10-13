@@ -11,6 +11,10 @@ coir_crop(data, plot = TRUE)
 
 \item{plot}{Default is TRUE. If TRUE, function plot circular cropped image.}
 }
+\value{
+Um objeto da classe `SpatRaster` (pacote `terra`) com a imagem
+recortada na área circular da lente fisheye.
+}
 \description{
 To analyze Canopy Opennes Index (COI), we shot images using a fisheye lens. Nevertheless that usability, fisheye images have null spaces, due image distorction. To avoid to overestimaye canopy closure, we need to previously crop the images.
 }

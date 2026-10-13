@@ -13,6 +13,10 @@ coir_binarize(data, threshold = 0.5, plot = TRUE)
 
 \item{plot}{default is TRUE. If TRUE, function plot circular cropped image.}
 }
+\value{
+Um objeto da classe `SpatRaster` (pacote `terra`) binarizado, em
+que cada pixel é classificado como céu ou vegetação.
+}
 \description{
 To analyze Canopy Opennes Index (COI), we need to difference what is interpreted in the image as canopy and what is interpred as sky. As our images are usely RGB (colored) images, a first step is to decompond our images into a black-and-white image, where we get a gradient from black (usely, value = 0) to white (usely, value = 1). Next, to binarize our image consists only to set a threshold (usely, >= 0.5, but check details), where values < threshold are interpreted as canopy and values >= threshold are interpreted as sky.
 }

@@ -11,6 +11,12 @@ coir_index(data, round = 2)
 
 \item{round}{Numeric. Default is 2. Round output decimal place count.}
 }
+\value{
+Um valor numérico (`numeric` de comprimento 1) com o Índice de
+Abertura do Dossel (COI), calculado como a proporção de pixels de céu na
+imagem binarizada. Valores próximos de 0 indicam dossel fechado e valores
+próximos de 1 indicam dossel aberto.
+}
 \description{
 Canopy Opennes Index (COI) is a value to define how much open is a canopy. This values ranges from 0 (full cole canopy) to 1 (full open canopy). to that function, we use a cropped binarized canopy image (see details).
 }
