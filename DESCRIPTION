@@ -9,7 +9,16 @@ Authors@R: c(
       role = c("aut", "cre")
     )
   )
-Description: Provides tools to crop, binarize, and analyze fisheye canopy images to calculate the Canopy Openness Index ("COI""). The package includes functions widely applicable in forest ecology studies.
+Description: ools to estimate the Canopy Openness Index (COI) from
+    hemispherical (fisheye) canopy photographs. The package imports canopy
+    images, crops them to the circular area delimited by the fisheye lens,
+    binarizes them to separate sky from vegetation pixels, and computes the
+    index as the proportion of sky pixels in the cropped image. Canopy
+    openness is a measure related to canopy closure, canopy cover and
+    understorey illumination, as discussed in Jennings, Brown and Sheil
+    (1999) "Assessing forest canopies and understorey illumination: canopy
+    closure, canopy cover and other measures" <doi:10.1093/forestry/72.1.59>.
+    Example canopy images are included so users can test the workflow.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
