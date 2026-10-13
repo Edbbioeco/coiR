@@ -11,6 +11,9 @@ NULL
 #'
 #' @param plot default is TRUE. If TRUE, function plot circular cropped image.
 #'
+#' @return Um objeto da classe `SpatRaster` (pacote `terra`) binarizado, em
+#' que cada pixel é classificado como céu ou vegetação.
+#'
 #' @details The threshold value is based on bridghtness index in pluvial forests, but that must be setted by image bridghtness index.
 
 #' @examples

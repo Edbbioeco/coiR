@@ -6,6 +6,11 @@
 #'
 #' @param round Numeric. Default is 2. Round output decimal place count.
 #'
+#' @return Um valor numérico (`numeric` de comprimento 1) com o Índice de
+#' Abertura do Dossel (COI), calculado como a proporção de pixels de céu na
+#' imagem binarizada. Valores próximos de 0 indicam dossel fechado e valores
+#' próximos de 1 indicam dossel aberto.
+#'
 #' @details It is possible to use previous image, but raw canopy images can be used through using coiR::coir_crop() and coiR::coir_binarize() functions.
 
 #' @examples

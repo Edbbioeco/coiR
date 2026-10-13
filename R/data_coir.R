@@ -8,6 +8,11 @@
 #'
 #' @details images are setted by a list of 4 rasters (SpatRast class). Pay attenction to exemple to know how procede with a single isolated image and a list of images.
 #'
+#' @return Um vetor de caracteres (`character`) com os caminhos completos das
+#' imagens de dossel de exemplo (formato PNG) instaladas com o pacote. Esses
+#' caminhos podem ser usados como entrada das demais funções, como
+#' `coir_crop()`.
+#'
 #' @examples
 #'
 #' # Load packages

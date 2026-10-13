@@ -6,6 +6,9 @@
 #'
 #' @param plot Default is TRUE. If TRUE, function plot circular cropped image.
 #'
+#' @return Um objeto da classe `SpatRaster` (pacote `terra`) com a imagem
+#' recortada na área circular da lente fisheye.
+#'
 #' @details That function must to be used only for images were not cropped. Wheter your data are images previously circular cropped, that function are not required to calculate COI.
 
 #' @examples
