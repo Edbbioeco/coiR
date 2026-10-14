@@ -9,7 +9,7 @@ Authors@R: c(
       role = c("aut", "cre")
     )
   )
-Description: ools to estimate the Canopy Openness Index (COI) from
+Description: Tools to estimate the Canopy Openness Index (COI) from
     hemispherical (fisheye) canopy photographs. The package imports canopy
     images, crops them to the circular area delimited by the fisheye lens,
     binarizes them to separate sky from vegetation pixels, and computes the
