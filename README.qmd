@@ -17,10 +17,18 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Installing package
 
+Run the following code to download coiR package:
+
 ```{r, eval = FALSE}
 require("devtools")
 
 devtools::install_github("Edbbioeco/coiR")
+```
+
+Or only:
+
+```{r, eval = FALSE}
+install.packages("coiR")
 ```
 
 # Loading package
