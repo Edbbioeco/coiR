@@ -11,6 +11,14 @@ execute:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+[![CRAN status](https://img.shields.io/cran/v/coiR)](https://CRAN.R-project.org/package=coiR)
+
+[![R-CMD-check](https://github.com/Edbbioeco/coiR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Edbbioeco/coiR/actions/workflows/R-CMD-check.yaml)
+
+[![License: GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
+[![GitHub version](https://img.shields.io/github/r-package/v/Edbbioeco/coiR?label=GitHub)](https://github.com/Edbbioeco/coiR)
+
 # [coiR](https://github.com/Edbbioeco/coiR)<img src="logo_coiR.png" align = "right" width="150">
 
 > Package to calculate Canopy Openness Index (COI) from canopy images
