@@ -2,6 +2,14 @@
 Edson Silva-Júnior
 2026-10-24
 
+[![](https://img.shields.io/cran/v/coiR.png)](https://CRAN.R-project.org/package=coiR)
+
+[![](https://github.com/Edbbioeco/coiR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Edbbioeco/coiR/actions/workflows/R-CMD-check.yaml)
+
+[![](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
+[![](https://img.shields.io/github/r-package/v/Edbbioeco/coiR?label=GitHub.png)](https://github.com/Edbbioeco/coiR)
+
 # [coiR](https://github.com/Edbbioeco/coiR)<img src="logo_coiR.png" align = "right" width="150">
 
 > Package to calculate Canopy Openness Index (COI) from canopy images
