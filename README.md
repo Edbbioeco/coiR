@@ -1,6 +1,6 @@
 # coiR
 Edson Silva-Júnior
-2026-09-29
+2026-10-24
 
 # [coiR](https://github.com/Edbbioeco/coiR)<img src="logo_coiR.png" align = "right" width="150">
 
@@ -8,10 +8,18 @@ Edson Silva-Júnior
 
 # Installing package
 
+Run the following code to download coiR package:
+
 ``` r
 require("devtools")
 
 devtools::install_github("Edbbioeco/coiR")
+```
+
+Or only:
+
+``` r
+install.packages("coiR")
 ```
 
 # Loading package
@@ -115,22 +123,22 @@ purrr::map(images,
 
     [[1]]
 
-![](README_files/figure-commonmark/unnamed-chunk-4-1.png)
+![](README_files/figure-commonmark/unnamed-chunk-5-1.png)
 
 
     [[2]]
 
-![](README_files/figure-commonmark/unnamed-chunk-4-2.png)
+![](README_files/figure-commonmark/unnamed-chunk-5-2.png)
 
 
     [[3]]
 
-![](README_files/figure-commonmark/unnamed-chunk-4-3.png)
+![](README_files/figure-commonmark/unnamed-chunk-5-3.png)
 
 
     [[4]]
 
-![](README_files/figure-commonmark/unnamed-chunk-4-4.png)
+![](README_files/figure-commonmark/unnamed-chunk-5-4.png)
 
 # Canopy Openness Index
 
@@ -154,7 +162,7 @@ single_image |>
   coiR::coir_crop()
 ```
 
-![](README_files/figure-commonmark/unnamed-chunk-6-1.png)
+![](README_files/figure-commonmark/unnamed-chunk-7-1.png)
 
     class       : SpatRaster
     size        : 800, 800, 4  (nrow, ncol, nlyr)
@@ -174,13 +182,13 @@ And we also can analyse multiple images from an one shot, using
 purrr::map(images, coiR::coir_crop)
 ```
 
-![](README_files/figure-commonmark/unnamed-chunk-7-1.png)
+![](README_files/figure-commonmark/unnamed-chunk-8-1.png)
 
-![](README_files/figure-commonmark/unnamed-chunk-7-2.png)
+![](README_files/figure-commonmark/unnamed-chunk-8-2.png)
 
-![](README_files/figure-commonmark/unnamed-chunk-7-3.png)
+![](README_files/figure-commonmark/unnamed-chunk-8-3.png)
 
-![](README_files/figure-commonmark/unnamed-chunk-7-4.png)
+![](README_files/figure-commonmark/unnamed-chunk-8-4.png)
 
     [[1]]
     class       : SpatRaster
@@ -243,7 +251,7 @@ single_image |>
   coiR::coir_binarize()
 ```
 
-![](README_files/figure-commonmark/unnamed-chunk-8-1.png)
+![](README_files/figure-commonmark/unnamed-chunk-9-1.png)
 
     class       : SpatRaster
     size        : 800, 800, 1  (nrow, ncol, nlyr)
@@ -270,13 +278,13 @@ purrr::map(images,
            .progress = TRUE)
 ```
 
-![](README_files/figure-commonmark/unnamed-chunk-9-1.png)
+![](README_files/figure-commonmark/unnamed-chunk-10-1.png)
 
-![](README_files/figure-commonmark/unnamed-chunk-9-2.png)
+![](README_files/figure-commonmark/unnamed-chunk-10-2.png)
 
-![](README_files/figure-commonmark/unnamed-chunk-9-3.png)
+![](README_files/figure-commonmark/unnamed-chunk-10-3.png)
 
-![](README_files/figure-commonmark/unnamed-chunk-9-4.png)
+![](README_files/figure-commonmark/unnamed-chunk-10-4.png)
 
     [[1]]
     class       : SpatRaster
