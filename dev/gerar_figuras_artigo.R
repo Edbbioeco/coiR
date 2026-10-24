@@ -34,47 +34,40 @@ ggsave(filename = "./dev/prancha_images_recortadas.png",
 
 # Binarizando images ----
 
-## Gerando as múltiplas imagens ----
+purrr::map(coiR::data_coir(),
+           \(image){
 
-imagen_bin <- function(threshold){
+             img <- terra::rast(image) |>
+               coiR::coir_crop(plot = FALSE)
 
-  bin_img <- function(image, nome){
+             rgb_plot <- ggplot2::ggplot() +
+               tidyterra::geom_spatraster_rgb(data = img) +
+               ggplot2::theme_void()
 
-    imagem <- image |>
-      coiR::coir_crop(plot = FALSE) |>
-      coiR::coir_binarize(plot = FALSE,
-                          threshold = threshold)
+             bin_plots <- purrr::map(
+               c(0.5, 0.75, 0.9),
+               \(threshold){
 
-    ggplt <- ggplot() +
-      tidyterra::geom_spatraster(data = imagem) +
-      scale_fill_viridis_c(na.value = "transparent") +
-      labs(title = paste0(nome, ": threshold = ", threshold)) +
-      theme_void() +
-      theme(plot.title = element_text(color = "black", size = 25),
-            legend.position = "none")
+                 ggplot() +
+                   tidyterra::geom_spatraster(
 
-    assign(paste0("bin_", nome, "_", threshold),
-           ggplt,
-           envir = globalenv())
+                     data = img |>
+                       coiR::coir_binarize(threshold = threshold)
 
-    }
+                     ) +
+                   scale_fill_viridis_c(na.value = "transparent") +
+                   labs(title = paste("Threshold =", threshold)) +
+                   theme_void() +
+                   theme(legend.position = "none")
 
-  purrr::map2(coiR::data_coir(),
-              paste0("image", 1:length(coiR::data_coir())),
-              bin_img)
+                 })
 
-}
+             c(list(rgb_plot), bin_plots)
 
-purrr::map(seq(0.5, 0.9, 0.2),
-           imagen_bin)
+             },
+           .progress = TRUE) |>
+  purrr::list_flatten() |>
+  patchwork::wrap_plots(ncol = 4)
 
-
-## Criando a prancha ----
-
-ls(pattern = "^bin_image") |>
-  mget(envir = globalenv()) |>
-  patchwork::wrap_plots(ncol = 3, nrow = 4) +
-  ggview::canvas(height = 12, width = 12)
-
-ggsave(filename = "prancha_images_binarizadas.png",
+ggsave(filename = "./dev/prancha_images_binarizadas.png",
        height = 12, width = 12)
